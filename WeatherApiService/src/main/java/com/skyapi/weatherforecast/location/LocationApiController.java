@@ -39,4 +39,14 @@ public class LocationApiController {
         }
         return ResponseEntity.ok().body(location);
     }
+
+    @PutMapping
+      public ResponseEntity<?> updateLocation(@RequestBody @Valid Location location){
+          try{
+              Location updatedLocation = locationService.update(location);
+              return ResponseEntity.ok(updatedLocation);
+          }catch (LocationNotFoundException e){
+              return ResponseEntity.notFound().build();
+          }
+        }
 }
