@@ -138,7 +138,6 @@ public class LocationApiControllerTest {
 
     @Test
     public  void testUpdateShouldReturn404NotFound() throws LocationNotFoundException, Exception {
-        String code = "ABCDEF";
         Location location = new Location();
         location.setCode("ABCDEF");
         location.setCityName("New Delhi");
@@ -151,6 +150,21 @@ public class LocationApiControllerTest {
         String bodyContent = objectMapper.writeValueAsString(location);
         mockMvc.perform(put(END_POINT_PATH).contentType("application/json").content(bodyContent))
                 .andExpect(status().isNotFound())
+                .andDo(print());
+    }
+
+    @Test
+    public  void testUpdateShouldReturn400BadRequest() throws LocationNotFoundException, Exception {
+        Location location = new Location();
+        location.setCityName("New Delhi");
+        location.setRegionName("Delhi");
+        location.setCountryCode("IN");
+        location.setCountryName("India");
+        location.setEnabled(true);
+
+        String bodyContent = objectMapper.writeValueAsString(location);
+        mockMvc.perform(put(END_POINT_PATH).contentType("application/json").content(bodyContent))
+                .andExpect(status().isBadRequest())
                 .andDo(print());
     }
 }
