@@ -167,4 +167,24 @@ public class LocationApiControllerTest {
                 .andExpect(status().isBadRequest())
                 .andDo(print());
     }
+
+    @Test
+    public void testUpdateShouldReturn200OK() throws Exception, LocationNotFoundException {
+        Location location = new Location();
+        location.setCode("NYC_USA");
+        location.setCityName("New York City");
+        location.setRegionName("New York");
+        location.setCountryCode("US");
+        location.setCountryName("United States of America");
+        location.setEnabled(true);
+
+        Mockito.when(locationService.update(location)).thenReturn(location);
+        String bodyContent = objectMapper.writeValueAsString(location);
+
+        mockMvc.perform(put(END_POINT_PATH).contentType("application/json").content(bodyContent))
+                .andExpect(status().isOk() )
+                .andExpect(content().contentType("application/json"))
+                .andExpect(jsonPath("$.code",is("NYC_USA")))
+                .andDo(print());
+    }
 }
