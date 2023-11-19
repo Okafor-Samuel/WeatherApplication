@@ -35,4 +35,11 @@ public class LocationService {
 
         return locationRepository.save(locationInDB);
     }
+
+    public void delete(String code) throws LocationNotFoundException {
+        if(!locationRepository.existsById(code)){
+            throw new LocationNotFoundException("No location found with the given code "+code);
+        }
+        locationRepository.trashedByCode(code);
+    }
 }
