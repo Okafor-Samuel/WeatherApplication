@@ -187,4 +187,9 @@ public class LocationApiControllerTest {
                 .andExpect(jsonPath("$.code",is("NYC_USA")))
                 .andDo(print());
     }
+
+    @Test
+    public void testDeleteShouldReturn404NotFound(){
+
+    }
 }
