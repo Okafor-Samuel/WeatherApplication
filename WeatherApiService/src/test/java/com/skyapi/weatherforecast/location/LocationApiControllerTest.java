@@ -96,7 +96,7 @@ public class LocationApiControllerTest {
     }
 
     @Test
-    public void testShouldReturn405MethodNotAllowed() throws Exception {
+    public void testGetShouldReturn405MethodNotAllowed() throws Exception {
          String requestURI = END_POINT_PATH +"/ABCD";
 
          mockMvc.perform(post(requestURI))
@@ -105,7 +105,7 @@ public class LocationApiControllerTest {
     }
 
     @Test
-    public void testShouldReturn404NotFound() throws Exception {
+    public void testGetShouldReturn404NotFound() throws Exception {
         String requestURI = END_POINT_PATH +"/ABCD";
 
         mockMvc.perform(get(requestURI))
@@ -114,7 +114,7 @@ public class LocationApiControllerTest {
     }
 
     @Test
-    public void testShouldReturn200Ok() throws Exception {
+    public void testGetShouldReturn200Ok() throws Exception {
         Location location = new Location();
         location.setCode("USA");
         location.setCityName("New Delhi");
@@ -189,7 +189,25 @@ public class LocationApiControllerTest {
     }
 
     @Test
-    public void testDeleteShouldReturn404NotFound(){
+    public void testDeleteShouldReturn404NotFound() throws Exception, LocationNotFoundException {
+        String code = "USA";
+        String requestURI = END_POINT_PATH + "/" +code;
 
+        Mockito.doThrow(LocationNotFoundException.class).when(locationService).delete(code);
+
+        mockMvc.perform(delete(requestURI))
+                .andExpect(status().isNotFound())
+                .andDo(print());
+    }
+    @Test
+    public void testDeleteShouldReturn204NoContent() throws LocationNotFoundException, Exception {
+        String code = "USA";
+        String requestURI = END_POINT_PATH + "/" +code;
+
+        Mockito.doNothing().when(locationService).delete(code);
+
+        mockMvc.perform(delete(requestURI))
+                .andExpect(status().isNoContent())
+                .andDo(print());
     }
 }
