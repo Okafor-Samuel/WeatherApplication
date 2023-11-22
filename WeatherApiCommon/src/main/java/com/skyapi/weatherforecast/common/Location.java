@@ -19,23 +19,22 @@ import javax.annotation.processing.Generated;
 public class Location {
     @Id
     @Column(length = 12, nullable = false, unique = true)
-    @NotBlank
+    @NotBlank(message = "Location code cannot be blank")
     private String code;
     @Column(length = 128, nullable = false)
     @JsonProperty("city_name")
-    @NotBlank
+    @NotBlank(message = "City name cannot be blank")
     private String cityName;
     @Column(length = 128)
     @JsonProperty("region_name")
-    @NotNull
     private String regionName;
     @Column(length = 64, nullable = false)
     @JsonProperty("country_name")
-    @NotBlank
+    @NotBlank(message = "Country name cannot be blank")
     private String countryName;
     @Column(length = 4, nullable = false)
     @JsonProperty("country_code")
-    @NotBlank
+    @NotBlank(message = "Country code cannot be blank")
     private String countryCode;
     private boolean enabled;
     @JsonIgnore
