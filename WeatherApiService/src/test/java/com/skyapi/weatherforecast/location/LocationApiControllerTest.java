@@ -68,6 +68,24 @@ public class LocationApiControllerTest {
     }
 
     @Test
+    public void testValidateRequestBodyLocationCode() throws Exception {
+        Location location = new Location();
+        location.setCityName("New York City");
+        location.setRegionName("New York");
+        location.setCountryCode("US");
+        location.setCountryName("United States of America");
+        location.setEnabled(true);
+
+        String bodyContent = objectMapper.writeValueAsString(location);
+
+        mockMvc.perform(post(END_POINT_PATH).contentType("application/json").content(bodyContent))
+                .andExpect(status().isBadRequest())
+                .andExpect(content().contentType("application/json"))
+             //   .andExpect(jsonPath("$.code",is("NYC_USA")))
+                .andDo(print());
+    }
+
+    @Test
     public void testListShouldReturn200Ok() throws Exception {
         Location location1 = new Location();
         location1.setCode("NYC_USA");
