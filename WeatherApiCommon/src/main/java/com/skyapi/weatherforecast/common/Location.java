@@ -19,7 +19,7 @@ import javax.annotation.processing.Generated;
 public class Location {
     @Id
     @Column(length = 12, nullable = false, unique = true)
-    @NotBlank(message = "Location code cannot be blank")
+    @NotNull(message = "Location code cannot be null")
     private String code;
     @Column(length = 128, nullable = false)
     @JsonProperty("city_name")
