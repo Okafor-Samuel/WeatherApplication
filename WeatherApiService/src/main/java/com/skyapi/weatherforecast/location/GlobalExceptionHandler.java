@@ -43,7 +43,8 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatusCode status, WebRequest request) {
-       ErrorDto error = new ErrorDto();
+        LOGGER.error(ex.getMessage(), ex);
+        ErrorDto error = new ErrorDto();
        error.setTimeStamp(new Date());
        error.setStatus(HttpStatus.BAD_REQUEST.value());
        error.setPath(((ServletWebRequest) request).getRequest().getServletPath());
@@ -52,6 +53,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
        fieldErrors.forEach(fieldError -> {
            error.addError(fieldError.getDefaultMessage());
         });
+
        return new ResponseEntity<>(error, headers, status);
     }
 }
