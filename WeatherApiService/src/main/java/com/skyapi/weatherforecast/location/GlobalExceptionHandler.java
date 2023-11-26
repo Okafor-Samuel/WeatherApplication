@@ -53,7 +53,6 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
        fieldErrors.forEach(fieldError -> {
            error.addError(fieldError.getDefaultMessage());
         });
-
        return new ResponseEntity<>(error, headers, status);
     }
 }
