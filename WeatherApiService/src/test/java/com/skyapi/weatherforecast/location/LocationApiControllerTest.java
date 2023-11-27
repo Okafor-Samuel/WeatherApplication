@@ -86,6 +86,25 @@ public class LocationApiControllerTest {
     }
 
     @Test
+    public void testValidateRequestBodyLocationCodeLength() throws Exception {
+        Location location = new Location();
+        location.setCode("");
+        location.setCityName("New York City");
+        location.setRegionName("New York");
+        location.setCountryCode("US");
+        location.setCountryName("United States of America");
+        location.setEnabled(true);
+
+        String bodyContent = objectMapper.writeValueAsString(location);
+
+        mockMvc.perform(post(END_POINT_PATH).contentType("application/json").content(bodyContent))
+                .andExpect(status().isBadRequest())
+                .andExpect(content().contentType("application/json"))
+                .andExpect(jsonPath("$.errors[0]",is("Location code must have 3 to 12 characters")))
+                .andDo(print());
+    }
+
+    @Test
     public void testListShouldReturn200Ok() throws Exception {
         Location location1 = new Location();
         location1.setCode("NYC_USA");
