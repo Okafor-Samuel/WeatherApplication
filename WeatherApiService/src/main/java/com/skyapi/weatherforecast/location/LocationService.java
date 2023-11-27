@@ -45,4 +45,5 @@ public class LocationService {
         }
         locationRepository.trashedByCode(code);
     }
+
 }
