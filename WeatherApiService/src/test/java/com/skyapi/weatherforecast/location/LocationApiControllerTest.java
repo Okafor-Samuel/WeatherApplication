@@ -68,7 +68,7 @@ public class LocationApiControllerTest {
     }
 
     @Test
-    public void testValidateRequestBodyLocationCode() throws Exception {
+    public void testValidateRequestBodyLocationCodeNotNull() throws Exception {
         Location location = new Location();
         location.setCityName("New York City");
         location.setRegionName("New York");
@@ -81,7 +81,7 @@ public class LocationApiControllerTest {
         mockMvc.perform(post(END_POINT_PATH).contentType("application/json").content(bodyContent))
                 .andExpect(status().isBadRequest())
                 .andExpect(content().contentType("application/json"))
-             //   .andExpect(jsonPath("$.code",is("NYC_USA")))
+                .andExpect(jsonPath("$.errors[0]",is("Location code cannot be null")))
                 .andDo(print());
     }
 
