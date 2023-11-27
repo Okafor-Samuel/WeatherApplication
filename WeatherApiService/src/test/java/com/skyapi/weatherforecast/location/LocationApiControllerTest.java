@@ -10,14 +10,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 
 import java.util.Collections;
 import java.util.List;
+
 
 import static org.hamcrest.core.Is.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 
 @WebMvcTest(LocationApiController.class)
@@ -107,13 +110,22 @@ public class LocationApiControllerTest {
     @Test
     public void testValidateRequestBodyAllFieldsInvalid () throws Exception {
         Location location = new Location();
+        location.setRegionName("");
 
         String bodyContent = objectMapper.writeValueAsString(location);
 
-        mockMvc.perform(post(END_POINT_PATH).contentType("application/json").content(bodyContent))
+        MvcResult mvcResult = mockMvc.perform(post(END_POINT_PATH).contentType("application/json").content(bodyContent))
                 .andExpect(status().isBadRequest())
                 .andExpect(content().contentType("application/json"))
-                .andDo(print());
+                .andDo(print())
+                .andReturn();
+        String responseBody = mvcResult.getResponse().getContentAsString();
+
+        assertThat(responseBody).contains("Location code cannot be null");
+        assertThat(responseBody).contains("City name cannot be null");
+        assertThat(responseBody).contains("Region name must have 3 to 120 characters");
+        assertThat(responseBody).contains("Country name cannot be null");
+        assertThat(responseBody).contains("Country code cannot be null");
     }
 
     @Test
