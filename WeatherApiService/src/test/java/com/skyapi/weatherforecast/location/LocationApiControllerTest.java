@@ -2,6 +2,7 @@ package com.skyapi.weatherforecast.location;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.skyapi.weatherforecast.common.Location;
+import com.skyapi.weatherforecast.exception.LocationNotFoundException;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
