@@ -1,4 +1,4 @@
-package com.skyapi.weatherforecast.location;
+package com.skyapi.weatherforecast.exception;
 
 public class LocationNotFoundException extends Throwable {
     public LocationNotFoundException(String message) {
