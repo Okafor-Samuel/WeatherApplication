@@ -1,7 +1,5 @@
 package com.skyapi.weatherforecast.location;
 
-
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.skyapi.weatherforecast.common.Location;
 import org.junit.jupiter.api.Test;
