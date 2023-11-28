@@ -1,4 +1,4 @@
-package com.skyapi.weatherforecast.location;
+package com.skyapi.weatherforecast.exception;
 
 import jakarta.servlet.http.HttpServletRequest;
 
