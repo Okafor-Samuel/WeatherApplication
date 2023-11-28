@@ -51,4 +51,8 @@ public class Location {
 
     @JsonIgnore
     private boolean trashed;
+
+    @OneToOne(mappedBy = "location", cascade = CascadeType.ALL)
+    @PrimaryKeyJoinColumn
+    private RealtimeWeather realtimeWeather;
 }
