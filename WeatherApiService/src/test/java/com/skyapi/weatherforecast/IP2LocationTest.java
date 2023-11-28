@@ -31,6 +31,7 @@ public class IP2LocationTest {
         IPResult ipResult = ip2Location.IPQuery(ipAddress);
 
         assertThat(ipResult.getStatus()).isEqualTo("OK");
+        assertThat(ipResult.getCity()).isEqualTo("New York City");
         System.out.println(ipResult);
     }
 }
