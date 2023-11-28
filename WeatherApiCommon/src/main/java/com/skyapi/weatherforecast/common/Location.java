@@ -55,4 +55,7 @@ public class Location {
     @OneToOne(mappedBy = "location", cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn
     private RealtimeWeather realtimeWeather;
+
+    public Location(String city, String region, String countryLong, String countryShort) {
+    }
 }
