@@ -21,4 +21,16 @@ public class IP2LocationTest {
         assertThat(ipResult.getStatus()).isEqualTo("INVALID_IP_ADDRESS");
         System.out.println(ipResult);
     }
+
+    @Test
+    public void testValidIp1() throws IOException {
+        IP2Location ip2Location = new IP2Location();
+        ip2Location.Open(DBPath);
+
+        String ipAddress = "108.30.178.78"; // An IP address in New York City
+        IPResult ipResult = ip2Location.IPQuery(ipAddress);
+
+        assertThat(ipResult.getStatus()).isEqualTo("OK");
+        System.out.println(ipResult);
+    }
 }
