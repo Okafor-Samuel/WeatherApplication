@@ -72,7 +72,7 @@ public class LocationRepositoryTests {
 
     @Test
     public void testAddRealtimeWeatherData(){
-        String code = "b";
+        String code = "c";
 
         Location location = locationRepository.findByCode(code);
         RealtimeWeather realtimeWeather = location.getRealtimeWeather();
@@ -81,11 +81,11 @@ public class LocationRepositoryTests {
             realtimeWeather.setLocation(location);
             location.setRealtimeWeather(realtimeWeather);
         }
-        realtimeWeather.setTemperature(10);
-        realtimeWeather.setHumidity(60);
-        realtimeWeather.setPrecipitation(70);
-        realtimeWeather.setStatus("Sunny");
-        realtimeWeather.setWindSpeed(10);
+        realtimeWeather.setTemperature(-20);
+        realtimeWeather.setHumidity(30);
+        realtimeWeather.setPrecipitation(0);
+        realtimeWeather.setStatus("Snow");
+        realtimeWeather.setWindSpeed(50);
         realtimeWeather.setLastUpdated(new Date());
 
         Location updatelocation = locationRepository.save(location);
