@@ -16,8 +16,8 @@ import javax.annotation.processing.Generated;
 @NoArgsConstructor
 @Entity
 @EqualsAndHashCode
-@Table(name = "locations")
-public class Location {
+@Table(name = "location")
+public class   Location {
     @Id
     @Column(length = 12, nullable = false, unique = true)
     @NotNull(message = "Location code cannot be null")
@@ -56,6 +56,11 @@ public class Location {
     @PrimaryKeyJoinColumn
     private RealtimeWeather realtimeWeather;
 
-    public Location(String city, String region, String countryLong, String countryShort) {
+    public Location(String cityName, String regionName, String countryName, String countryCode) {
+        super();
+        this.cityName = cityName;
+        this.regionName = regionName;
+        this.countryName = countryName;
+        this.countryCode = countryCode;
     }
 }
