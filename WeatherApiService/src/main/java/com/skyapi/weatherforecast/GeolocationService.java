@@ -5,8 +5,6 @@ import com.ip2location.IPResult;
 import com.skyapi.weatherforecast.common.Location;
 import com.skyapi.weatherforecast.exception.GeolocationException;
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
