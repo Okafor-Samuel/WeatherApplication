@@ -33,7 +33,7 @@ public class RealtimeWeather {
 
     @OneToOne
     @JoinColumn(name = "location_code")
-    @MapsId
+//    @MapsId
     private Location location;
 
 }
