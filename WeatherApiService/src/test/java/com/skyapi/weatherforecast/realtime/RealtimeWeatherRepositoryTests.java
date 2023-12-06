@@ -23,15 +23,34 @@ public class RealtimeWeatherRepositoryTests {
         String locationCode = "b";
 
        RealtimeWeather realtimeWeather = weatherRepository.findById(locationCode).get();
-        realtimeWeather.setTemperature(-2);
-        realtimeWeather.setHumidity(40);
-        realtimeWeather.setPrecipitation(10);
+        realtimeWeather.setTemperature(0);
+        realtimeWeather.setHumidity(10);
+        realtimeWeather.setPrecipitation(20);
         realtimeWeather.setStatus("Rainy");
-        realtimeWeather.setWindSpeed(35);
+        realtimeWeather.setWindSpeed(30);
         realtimeWeather.setLastUpdated(new Date());
 
        RealtimeWeather updatedRealtimeWeather = weatherRepository.save(realtimeWeather);
 
-       assertThat(updatedRealtimeWeather.getHumidity()).isEqualTo(40);
+       assertThat(updatedRealtimeWeather.getHumidity()).isEqualTo(10);
+    }
+
+    @Test
+    public void testFindByCountryCodeAndCityNotFound(){
+        String countryCode = "JP";
+        String cityName = "Tokyo";
+
+        RealtimeWeather realtimeWeather = weatherRepository.findByCountryCodeAndCity(countryCode, cityName);
+        assertThat(realtimeWeather).isNull();
+    }
+
+    @Test
+    public void testFindByCountryCodeAndCityFound(){
+        String countryCode = "NG";
+        String cityName = "New York City";
+
+        RealtimeWeather realtimeWeather = weatherRepository.findByCountryCodeAndCity(countryCode, cityName);
+        assertThat(realtimeWeather).isNotNull();
+        assertThat(realtimeWeather.getLocation().getCityName()).isEqualTo(cityName);
     }
 }
