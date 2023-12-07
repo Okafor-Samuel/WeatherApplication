@@ -72,7 +72,7 @@ public class LocationRepositoryTests {
 
     @Test
     public void testAddRealtimeWeatherData(){
-        String code = "c";
+        String code = "ABCD";
 
         Location location = locationRepository.findByCode(code);
         RealtimeWeather realtimeWeather = location.getRealtimeWeather();
@@ -88,8 +88,8 @@ public class LocationRepositoryTests {
         realtimeWeather.setWindSpeed(50);
         realtimeWeather.setLastUpdated(new Date());
 
-        Location updatelocation = locationRepository.save(location);
-        assertThat(updatelocation.getRealtimeWeather().getLocationCode()).isEqualTo(code);
+        Location updatedLocation = locationRepository.save(location);
+        assertThat(updatedLocation.getRealtimeWeather().getLocationCode()).isEqualTo(code);
     }
 
 }
