@@ -39,7 +39,6 @@ public class LocationApiController {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok().body(location);
-
     }
 
     @PutMapping
