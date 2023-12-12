@@ -16,6 +16,7 @@ import java.util.List;
 public class LocationApiController {
     private final LocationService locationService;
 
+
     @PostMapping
     public ResponseEntity<Location> addLocation( @RequestBody @Valid  Location location){
      Location addedLocation = locationService.add(location);
